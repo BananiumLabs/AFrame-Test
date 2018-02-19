@@ -6,7 +6,8 @@
     <script src="https://aframe.io/releases/0.5.0/aframe.min.js"></script>
     <script src="../build.js"></script>
     <script src="../components/audioanalyser-volume-scale.js"></script>
-     <header name = "Access-Control-Allow-Origin" value = "*" /> 
+    <script src="../components/color-on-beat.js"></script>
+     <header name = "Access-Control-Allow-Origin" value = "*" />
   </head>
   <body>
     <a-scene antialias="true">
@@ -32,6 +33,7 @@
         position="0 1 -4"
         side="double"
         shader="flat"
+        color-on-beat="analyserEl: #analyser"
       ></a-cylinder>
 
       <a-light type="ambient" color="#222"></a-light>
