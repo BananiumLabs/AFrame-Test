@@ -1,33 +1,33 @@
-<!DOCTYPE html>
-<html>
-  <head>
-    <title>Basic Scene with Environment - A-Frame</title>
-    <meta name="description" content="Basic Scene with Environment - A-Frame">
-    <script src="https://aframe.io/releases/0.6.1/aframe.min.js"></script>
-    <script src="https://unpkg.com/aframe-environment-component@1.0.0/dist/aframe-environment-component.min.js"></script>
-  </head>
-  <body>
-    <!-- Try changing the preset to one of default, contact, egypt, checkerboard, forest, goaland, yavapai, goldmine,
-         threetowers, poison, arches, tron, japan, dream, volcano, starry, osiris. -->
-    <!-- See more environment options: https://github.com/feiss/aframe-environment-component#parameters -->
-    <a-scene environment="preset: japan">
-      <a-assets>
-        <img id="boxTexture" src="https://i.imgur.com/mYmmbrp.jpg">
-      </a-assets>
+<head>
+  <title>Audio Visualizer</title>
+  <script src="bundle.js"></script>
+</head>
 
-      <a-box position="0 2 -5" rotation="0 45 45" scale="2 2 2" src="#boxTexture">
-        <a-animation attribute="position" direction="alternate" dur="2000" repeat="indefinite"
-          to="0 2.2 -5"></a-animation>
-        <a-animation attribute="rotation" begin="click" dur="2000" to="360 405 45"></a-animation>
-        <a-animation attribute="scale" begin="mouseenter" dur="300" to="2.3 2.3 2.3"></a-animation>
-        <a-animation attribute="scale" begin="mouseleave" dur="300" to="2 2 2"></a-animation>
-      </a-box>
+<body>
+  <a-scene>
+    <a-assets>
+      <audio id="song" src="rickroll.mp3" autoplay loop></audio>
+      <img id="floor" src="https://cdn.aframe.io/a-painter/images/floor.jpg" crossOrigin="anonymous">
+      <img id="skymap" src="https://cdn.aframe.io/a-painter/images/sky.jpg" crossOrigin="anonymous">
+    </a-assets>
 
-      <a-text value="Hello, A-Frame!" color="#FAFAFA" position="-0.9 0.2 -3" scale="1.5 1.5 1.5"></a-text>
-
-      <a-camera>
-        <a-cursor color="#FAFAFA"></a-cursor>
-      </a-camera>
-    </a-scene>
-  </body>
-</html>
+    <a-entity id="analyser"
+        audioanalyser
+        spotify>
+      </a-entity>
+      
+    <a-entity id="sky"
+      geometry="primitive: sphere; radius: 30; phiLength: 360; phiStart: 0; thetaLength: 90"
+      material="shader: flat; side: back; height: 2048; src: #skymap; width: 2048"
+    ></a-entity>
+    <a-entity id="ground"
+      geometry="primitive: circle; radius: 30.5"
+      rotation="-90 0 0"
+      material="src: #floor"
+    ></a-entity>
+    <a-entity
+      audio-analyser="#song"
+      component-that-does-stuff-with-audio-analyser-data
+    ></a-entity>
+  </a-scene>
+</body>
